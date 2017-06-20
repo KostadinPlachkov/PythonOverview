@@ -6,4 +6,4 @@ Topics:
 * OOP
 * DB and SQLite
 * Files and Directories
-* Work with csv and txt files.
+* Work with HTTP and CSV, XML, JSON
