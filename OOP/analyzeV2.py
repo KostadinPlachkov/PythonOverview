@@ -14,7 +14,6 @@ COLUMN_TS = 3
 COLUMN_PRICE = 4
 COLUMN_CATEGORY = 5
 
-
 KEY_ITEM_ID = 'item_id'
 KEY_COUNTRY = 'country'
 KEY_CITY = 'city'
@@ -22,10 +21,10 @@ KEY_TS = 'ts'
 KEY_PRICE = 'price'
 
 
-
 def main():
     catalog = load_catalog(CATALOG_FILENAME)
-    print("Analysis")
+    print("Analysis...")
+    print("Please wait")
 
     analyzers = [
         TotalsAnalyzer(),
@@ -42,11 +41,11 @@ def main():
     for a in analyzers:
         a.print_results()
 
+
 # -----------------------------------------------
 
 
 class BaseAnalyzer:
-
     def analyze_sale(self, sale):
         pass
 
@@ -55,7 +54,6 @@ class BaseAnalyzer:
 
 
 class TotalsAnalyzer(BaseAnalyzer):
-
     def __init__(self):
         super().__init__()
         self.total_count = 0
@@ -75,17 +73,17 @@ class TotalsAnalyzer(BaseAnalyzer):
 
     def print_results(self):
         print("""
-Обобщение
+Summary
 ---------
-    Общ брой продажби: {total_count}
-    Общо сума продажби: {total_amount:.2f} €
-    Средна цена на продажба: {avegage_price:.2f} €
-    Начало на период на данните: {min_ts}
-    Край на период на данните: {max_ts}
+    Total sales: {total_count}
+    Total price: {total_amount:.2f} €
+    Average price for a product: {average_price:.2f} €
+    Staring date: {min_ts}
+    Ending date: {max_ts}
     """.format(
             total_count=self.total_count,
             total_amount=self.total_amount,
-            avegage_price=self.total_amount / self.total_count if self.total_count else None,
+            average_price=self.total_amount / self.total_count if self.total_count else None,
             min_ts=self.min_timestamp,
             max_ts=self.max_timestamp,
         ))
@@ -115,7 +113,7 @@ class AmountsGroupedAnalyzer(BaseAnalyzer):
         amounts_grouped_sorted.sort(key=lambda kv: kv[1], reverse=True)
 
         print("""
-Сума на продажби по {} (top 5)
+Sales by {} (top 5)
 -----------------------------
     """.format(self.group_by_title))
         for category_name, total_amount in amounts_grouped_sorted[:5]:
@@ -123,7 +121,7 @@ class AmountsGroupedAnalyzer(BaseAnalyzer):
 
 
 class AmountsByCategoryAnalyzer(AmountsGroupedAnalyzer):
-    group_by_title = 'категории'
+    group_by_title = 'categories'
 
     def get_group_by_value(self, sale):
         item_id = sale[KEY_ITEM_ID]
@@ -131,14 +129,14 @@ class AmountsByCategoryAnalyzer(AmountsGroupedAnalyzer):
 
 
 class AmountsByCityAnalyzer(AmountsGroupedAnalyzer):
-    group_by_title = 'градове'
+    group_by_title = 'cities'
 
     def get_group_by_value(self, sale):
         return sale[KEY_CITY]
 
 
 class AmountsByHourAnalyzer(AmountsGroupedAnalyzer):
-    group_by_title = 'часове'
+    group_by_title = 'hours'
 
     def get_group_by_value(self, sale):
         ts = sale[KEY_TS]
@@ -147,7 +145,6 @@ class AmountsByHourAnalyzer(AmountsGroupedAnalyzer):
 
 
 def load_catalog(filename: str) -> dict:
-
     result = {}
     with open(filename, 'r', encoding='utf-8') as f:
         reader = csv.reader(f)
@@ -159,7 +156,6 @@ def load_catalog(filename: str) -> dict:
 
 
 def load_sales(filename: str) -> list:
-
     with open(filename, 'r', encoding='utf-8') as f:
         reader = csv.reader(f)
         for row in reader:
