@@ -38,12 +38,12 @@ def main():
         )
         data = cursor.fetchall()
         if data:
-            print("Продажби в град %s:" % city)
+            print("Sales in %s:" % city)
             for row_number, row in enumerate(data, start = 1):
                 item, date, price = row
-                print(row_number, "Артикул #: {}   дата/час: {}   сума: {:.2f}".format(item, date, price))
+                print(row_number, "Product #: {}   date/hour: {}   price: {:.2f}".format(item, date, price))
         else:
-            print("Няма данни за продажби в град", city)
+            print("No data for sales in", city)
 
 
 
