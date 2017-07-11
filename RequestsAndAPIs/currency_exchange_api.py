@@ -12,9 +12,9 @@ def main():
 
 
 def user_input(URL_API_LATEST):
-    print("Конвертор на валути към български лева.")
-    currency = str(input("Въведете валута:")).upper()
-    money = float(input("Въведете сума:"))
+    print("Bulgarian currency converter.")
+    currency = str(input("Enter currency:")).upper()
+    money = float(input("Enter amount:"))
     URL_API_LATEST_SET = URL_API_LATEST+currency
     return URL_API_LATEST_SET, money, currency
 
@@ -29,7 +29,7 @@ def getting_user_currency_to_bg(URL_API_LATEST_SET, user_money, user_currency):
             if not currency_perc:
                 print("NO DATA")
             bgn_money = user_money / currency_perc
-            print("Равностойност в BGN: %.2f" % bgn_money)
+            print("BGN: %.2f" % bgn_money)
         else:
             print("Error from server:", response.status_code)
     except Exception as e:
