@@ -6,19 +6,17 @@ URL_API = "http://api.fixer.io/{date}?base={from_currency}&symbols={to_currency}
 
 
 def main():
-
     user_input()
 
-
-
+    
 def user_input():
-    print("Конвертор на валути")
-    date = str(input("Въведете дата [yyyy-mm-dd]:"))
+    print("Currency converter")
+    date = str(input("Enter date [yyyy-mm-dd]:"))
     if not date:
         date = "latest"
-    base_currency = str(input("Въведете валута:")).upper()
-    money = float(input("Въведете сума:"))
-    to_currency = str(input("Въведете валута, към която да се конвертира:")).upper()
+    base_currency = str(input("Enter currency:")).upper()
+    money = float(input("Enter amount:"))
+    to_currency = str(input("Enter currency to convert:")).upper()
     URL_API_SET = URL_API.format(date = date, from_currency = base_currency, to_currency = to_currency)
 
     getting_currency_exchange(URL_API_SET, money, to_currency)
@@ -34,7 +32,7 @@ def getting_currency_exchange(URL_API_SET, user_money, to_currency):
             if not currency_rate:
                 print("NO DATA")
             exchanged_money = user_money * currency_rate
-            print("Равностойност в {}: {:.2f}".format(to_currency, exchanged_money))
+            print("{}: {:.2f}".format(to_currency, exchanged_money))
         else:
             print("Error from server:", response.status_code)
     except Exception as e:
