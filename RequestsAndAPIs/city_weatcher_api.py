@@ -15,7 +15,7 @@ def main():
 
 
 def user_input(URL_API):
-    city = str(input("Въведете град:"))
+    city = str(input("Enter city:"))
     return URL_API.format(city)
 
 def getting_data(URL_API_SET):
@@ -38,11 +38,11 @@ def getting_data(URL_API_SET):
 
 def printing_data(dt, temp_c, pressure, humidity, wind):
 
-    print("Информация към:", datetime.utcfromtimestamp(dt))
-    print("Температура: %.2f" % temp_c)
-    print("Налягане:", pressure)
-    print("Влажност: {}%".format(humidity))
-    print("Вятър: {} м/с".format(wind))
+    print("Information for:", datetime.utcfromtimestamp(dt))
+    print("Temperature: %.2f" % temp_c)
+    print("Pressure:", pressure)
+    print("Humidity: {}%".format(humidity))
+    print("Wind: {} м/с".format(wind))
 
 
 if __name__ == '__main__':
