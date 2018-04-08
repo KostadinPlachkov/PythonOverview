@@ -1,6 +1,5 @@
 # Python Overview
-Topics:
-* E-commerce
+Table of contents:
 * Requests and APIs
 * Algorithms
 * OOP
